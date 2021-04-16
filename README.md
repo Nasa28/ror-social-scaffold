@@ -71,7 +71,11 @@ TBA
 
 ## Authors
 
-TBA
+👨‍💻 **Kalu Chinasa Agu**
+
+- Github: [@Nasa28](https://github.com/Nasa28)
+-  Twitter: [@Ultimate_Nasa](https://twitter.com/Ultimate_Nasa)
+- LinkedIn: [LinkedIn](https://www.linkedin.com/in/kalu-chinasa-agu-a15080103/)
 
 ## 🤝 Contributing
 
