@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  get 'friendships/index'
   root 'posts#index'
 
   devise_for :users
@@ -11,5 +12,8 @@ Rails.application.routes.draw do
   end
 
     resources :friendships
+
+  get '/friends', to: 'friendships#index'
+  get '/friend_requests', to: 'friendships#friend_requests'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
