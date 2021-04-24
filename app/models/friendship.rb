@@ -1,21 +1,25 @@
 class Friendship < ApplicationRecord
-  belongs_to :creator, class_name: "User"
+  belongs_to :user
   belongs_to :friend, class_name: "User"
 
   scope :pending_requests, -> { where(status: false) }
   scope :confirmed_requests, -> { where(status: true) }
+
+
+
+
 
   def self.confirm_friend_request_for(user, friend)
     friendship = where(user: user, friend: friend)
                  .or(where(user: friend, friend: user))
 
     transaction do
-      friendship.update(status: true)
-      user.friendships.create(friend: friendship.first.user, status: true)
+      friendship.update(confirmed: true)
+      user.friendships.create(friend: friendship.first.user, confirmed: true)
     end
   end
 
-  def self.remove_friendship(user, friend)
+  def self.remove_friendship_between(user, friend)
     friendship = where(user: user, friend: friend)
                  .or(where(user: friend, friend: user))
 
@@ -29,6 +33,20 @@ class Friendship < ApplicationRecord
   def self.confirmed_friends_for(user)
     confirmed.where(user: user).map(&:friend)
   end
+
+  def self.mutual_friends_between(user, other_user)
+    find_by_sql(["SELECT friendships.*
+    FROM friendships
+    WHERE friendships.user_id = ?
+    AND friendships.friend_id
+    IN ( SELECT friendships.friend_id
+          FROM friendships
+          WHERE friendships.user_id = ?
+          AND confirmed = ?
+        );", user.id, other_user.id, true]).map(&:friend)
+  end
+
+  private
 
   def self_irreflexive
     msg = "can't be friends with self"

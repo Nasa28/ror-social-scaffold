@@ -8,14 +8,16 @@ class User < ApplicationRecord
   has_many :posts
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
-  has_many :friendships
-  has_many :inverse_friendships, class_name: "Friendship",
-           foreign_key: "friend_id"
+  
+  has_many :friendships, dependent: :destroy
+  has_many :friends, through: :friendships
+
+  has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "friend_id"
+  has_many :inverse_friends, :through => :inverse_friendships, :source => :user
+  scope :all_except, ->(user) { where.not(id: user) }
       
   def friends
-    friends_array = friendships.map{|friendship| friendship.friend if friendship.status}
-    friends_array + inverse_friendships.map{|friendship| friendship.user if friendship.status}
-    friends_array.compact
+    friendships.map{|friendship| friendship.friend if friendship.status}.compact
   end
           
   def pending_friends
@@ -31,6 +33,12 @@ class User < ApplicationRecord
     friendship.status = true
     friendship.save
   end
+
+  def reject_friendship(user)
+    friendship = inverse_friendships.find { |f| f.user == user }
+    friendship.destroy
+  end
+
           
   def friend?(user)
     friends.include?(user)

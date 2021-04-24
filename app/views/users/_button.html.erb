@@ -1,1 +1,1 @@
-  <%= link_to 'Invite to friendship',  new_friendship_path, class: 'profile-link' %>
+<%= link_to "Invite to friendship", request_friendship_path(friend_id: :user), method: :post %>
