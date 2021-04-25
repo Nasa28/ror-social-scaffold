@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
-   get '/request_friendship/:id', to: 'friendships#create', as: :request_friendship
-   patch '/confirm_request/:id', to: 'friendships#update', as: :confirm_request
-   delete '/reject_request/:id', to: 'friendships#destroy', as: :reject_request
+   get '/friend_request/:id', to: 'friendships#create', as: :friend_request
+   get '/confirm_request/:id', to: 'friendships#update', as: :confirm_request
+   get '/reject_request/:id', to: 'friendships#destroy', as: :reject_request
+   get '/cancel_friend_request/:id', to: 'friendships#cancel_friend_request', as: :cancel_friend_request
 root 'posts#index'
-
+ 
   devise_for :users
   resources :friendships, only: %i[create update destroy]
  
@@ -12,7 +13,5 @@ root 'posts#index'
     resources :comments, only: [:create]
     resources :likes, only: [:create, :destroy]
   end
-
-  
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

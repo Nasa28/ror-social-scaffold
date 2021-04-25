@@ -1,21 +1,29 @@
 class FriendshipsController < ApplicationController
   def create
-    user = User.find(params[:id])
-    redirect_to root_path, notice: 'Friendship invite sent'
-    Friendship.create(user_id: current_user.id, friend_id: user.id, status: false)
-    
+    new_user = User.find(params[:id])
+    redirect_to root_path, notice: 'Friendship Request Sent' if
+    Friendship.create(user_id: current_user.id, friend_id: new_user.id, status: false)
   end
 
   def update
-    user = User.find(params[:id])
-    current_user.confirm_friend(user)
-    redirect_to user, notice: 'friend request accepted'
+    new_user = User.find(params[:id])
+    if current_user.confirm_friend(new_user) 
+    Friendship.update(user_id: current_user.id, friend_id: new_user.id, status: true)
+    redirect_to new_user, notice: 'Request Accepted'
+    end
   end
 
   def destroy
-    user = User.find(params[:id])
-    current_user.reject_friendship(user)
-    redirect_to root_path, notice: 'request rejected'
+    new_user = User.find(params[:id])
+    current_user.reject_request(new_user)
+    redirect_to root_path, notice: 'Request Rejected'
   end
+
+  def cancel_friend_request 
+    friendships = current_user.friendships.find_by(params[:status])
+    friendships.destroy
+    redirect_to root_path, notice: 'Request Cancelled'
+  end
+
 end
 
