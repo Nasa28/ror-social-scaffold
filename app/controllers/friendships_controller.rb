@@ -19,9 +19,9 @@ class FriendshipsController < ApplicationController
     redirect_to root_path, notice: 'Request Rejected'
   end
 
-  def cancel_friend_request
-    friendships = current_user.friendships.find_by(params[:status])
-    friendships.destroy
-    redirect_to root_path, notice: 'Request Cancelled'
+  def remove_friend
+    remove_friendship = current_user.friendships.find_by(params[:status])
+    remove_friendship.destroy
+    redirect_to root_path, notice: 'Friend Removed Successfully'
   end
 end

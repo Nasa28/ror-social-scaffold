@@ -10,9 +10,11 @@ class User < ApplicationRecord
   has_many :likes, dependent: :destroy
 
   has_many :friendships, dependent: :destroy
+  has_many :friends, through: :friendships,class_name: 'Friendship', dependent: :destroy
   has_many :inverse_friendships, class_name: 'Friendship', foreign_key: 'friend_id'
   scope :all_except, ->(user) { where.not(id: user) }
-
+  has_many :friends_posts, through: :friends, source: :posts
+  
   def friends
     friendships.map { |friendship| friendship.friend if friendship.status }.compact
   end
