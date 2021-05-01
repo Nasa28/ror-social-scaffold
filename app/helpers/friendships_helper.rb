@@ -1,5 +1,4 @@
 module FriendshipsHelper
-
   # rubocop:disable Metrics/CyclomaticComplexity
   def send_request(user)
     if current_user.friend?(user) || user.friend?(user)
