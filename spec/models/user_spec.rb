@@ -3,17 +3,17 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
   context 'validation' do
     it 'test name presence' do
-    user = User.new(email: 'kalu@gmail.com', password: '123456').save
-    expect(user).to eq(false)
+      user = User.new(email: 'kalu@gmail.com', password: '123456').save
+      expect(user).to eq(false)
     end
     it 'test email address presence' do
-    user = User.new(name: 'chinasa', email: '', password: '123467').save
-    expect(user).to eq(false)
+      user = User.new(name: 'chinasa', email: '', password: '123467').save
+      expect(user).to eq(false)
     end
 
     it 'test password presence' do
-    user = User.new(name: 'chinasa', email: 'kalu@gmail.com', password: '').save
-    expect(user).to eq(false)
+      user = User.new(name: 'chinasa', email: 'kalu@gmail.com', password: '').save
+      expect(user).to eq(false)
     end
 
     it 'test password length ' do
