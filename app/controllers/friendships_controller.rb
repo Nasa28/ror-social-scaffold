@@ -8,8 +8,7 @@ class FriendshipsController < ApplicationController
   def update
     new_user = User.find(params[:id])
     return unless current_user.confirm_friend(new_user)
-
-    Friendship.update(user_id: current_user.id, friend_id: new_user.id, status: true)
+    Friendship.create!(user_id: current_user.id, friend_id: new_user.id, status: true)
     redirect_to new_user, notice: 'Request Accepted'
   end
 

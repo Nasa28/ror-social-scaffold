@@ -1,7 +1,8 @@
 module FriendshipsHelper
   def send_request(user)
-  if current_user.friend?(user) || user.friend?(current_user)
-    concat link_to 'Remove friend', remove_friend_path(user)
+  if current_user.friend?(user) || user.friend?(user)
+    concat link_to 'Remove friend', remove_friend_path(user), data: { confirm: 'Are you sure you want to remove this request?' }
+  
   
   elsif current_user.friend_requests.include?(user)
       concat link_to 'Accept', confirm_request_path(user), class: 'btn btn-success'

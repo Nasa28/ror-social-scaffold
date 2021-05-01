@@ -10,6 +10,9 @@
         <div class="menu-item">
           <%= menu_link_to current_user.name, users_path if signed_in? %>
         </div>
+        <div class="menu-item">
+          <%= menu_link_to current_user.friends.count, users_path if signed_in? %>
+        </div>
       </div>
       
       <% if current_user %>

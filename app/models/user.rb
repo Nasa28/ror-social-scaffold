@@ -8,12 +8,11 @@ class User < ApplicationRecord
   has_many :posts
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
-
   has_many :friendships, dependent: :destroy
-  has_many :friends, through: :friendships,class_name: 'Friendship', dependent: :destroy
-  has_many :inverse_friendships, class_name: 'Friendship', foreign_key: 'friend_id'
+  has_many :friends, through: :friendships, dependent: :destroy
+  has_many :inverse_friendships, class_name: 'Friendship', foreign_key: 'friend_id', dependent: :destroy
   scope :all_except, ->(user) { where.not(id: user) }
-  has_many :friends_posts, through: :friends, source: :posts
+ 
   
   def friends
     friendships.map { |friendship| friendship.friend if friendship.status }.compact
@@ -40,5 +39,14 @@ class User < ApplicationRecord
   def reject_request(user)
     friends = inverse_friendships.find { |friend| friend.user == user }
     friends.destroy
+  end 
+
+  def friend_ids
+    ids = friends.map{|ele| ele.id}
+    ids.push(id)
+  end
+
+  def friends_and_own_posts
+    Post.where(user: friend_ids)
   end
 end
