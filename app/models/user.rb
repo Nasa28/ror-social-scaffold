@@ -12,8 +12,7 @@ class User < ApplicationRecord
   has_many :friends, through: :friendships, dependent: :destroy
   has_many :inverse_friendships, class_name: 'Friendship', foreign_key: 'friend_id', dependent: :destroy
   scope :all_except, ->(user) { where.not(id: user) }
- 
-  
+
   def friends
     friendships.map { |friendship| friendship.friend if friendship.status }.compact
   end
@@ -39,10 +38,10 @@ class User < ApplicationRecord
   def reject_request(user)
     friends = inverse_friendships.find { |friend| friend.user == user }
     friends.destroy
-  end 
+  end
 
   def friend_ids
-    ids = friends.map{|ele| ele.id}
+    ids = friends.map(&:id)
     ids.push(id)
   end
 
