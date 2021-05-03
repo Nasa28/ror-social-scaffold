@@ -1,6 +1,7 @@
-module FriendshipsHelper
   # rubocop:disable Metrics/CyclomaticComplexity
   # rubocop:disable Metrics/PerceivedComplexity
+
+module FriendshipsHelper
   def send_request(user)
     if current_user.friend?(user) || user.friend?(user)
       concat link_to 'Remove friend', remove_friend_path(user),
@@ -15,3 +16,5 @@ module FriendshipsHelper
     end
   end
 end
+# rubocop:enable Metrics/CyclomaticComplexity
+# rubocop:enable Metrics/PerceivedComplexity
