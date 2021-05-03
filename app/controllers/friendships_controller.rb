@@ -20,8 +20,8 @@ class FriendshipsController < ApplicationController
   end
 
   def remove_friend
-    remove_friendship = current_user.friendships.find_by(params[:status])
-    remove_friendship.destroy
+    friend = User.find_by(id: params[:id])
+    Friendship.remove_friendships(current_user, friend)
     redirect_to root_path, notice: 'Friend Removed Successfully'
   end
 end
