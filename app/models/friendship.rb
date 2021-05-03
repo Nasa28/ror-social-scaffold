@@ -5,7 +5,7 @@ class Friendship < ApplicationRecord
 
   def self.remove_friendships(user, friend)
     friendship = where(user: user, friend: friend)
-                 .or(where(user: friend, friend: user))
+      .or(where(user: friend, friend: user))
 
     friendship.destroy_all
   end

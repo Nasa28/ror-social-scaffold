@@ -1,6 +1,3 @@
-# rubocop:disable Metrics/CyclomaticComplexity
-# rubocop:disable Metrics/PerceivedComplexity
-
 module FriendshipsHelper
   def send_request(user)
     if current_user.friend?(user) || user.friend?(user)
@@ -16,5 +13,3 @@ module FriendshipsHelper
     end
   end
 end
-# rubocop:enable Metrics/CyclomaticComplexity
-# rubocop:enable Metrics/PerceivedComplexity
