@@ -9,10 +9,11 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :friendships, dependent: :destroy
-  has_many :friends, through: :friendships, dependent: :destroy
   has_many :inverse_friendships, class_name: 'Friendship', foreign_key: 'friend_id', dependent: :destroy
   scope :all_except, ->(user) { where.not(id: user) }
-
+  has_many :confirm_friendship, -> { where status: true }, class_name: "Friendship"
+  has_many :friends, through: :confirmed_friendships
+  
   def friends
     friendships.map { |friendship| friendship.friend if friendship.status }.compact
   end
@@ -23,12 +24,6 @@ class User < ApplicationRecord
 
   def friend_requests
     inverse_friendships.map { |friendship| friendship.user unless friendship.status }.compact
-  end
-
-  def confirm_friend(user)
-    friendships = inverse_friendships.find { |friendship| friendship.user == user }
-    friendships.status = true
-    friendships.save
   end
 
   def friend?(user)
