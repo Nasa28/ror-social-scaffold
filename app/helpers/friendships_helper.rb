@@ -18,4 +18,3 @@ module FriendshipsHelper
 end
 # rubocop:enable Metrics/CyclomaticComplexity
 # rubocop:enable Metrics/PerceivedComplexity
-
