@@ -11,7 +11,7 @@ module FriendshipsHelper
       concat '   '
       concat link_to 'Reject', reject_request_path(user), class: 'btn btn-danger'
 
-    elsif current_user.pending_friends.none?(user) && !current_user.friend?(user) && current_user != user
+    elsif !current_user.pending_friends.include?(user) && !current_user.friend?(user) && current_user != user
       concat link_to 'Invite to friendship', friend_request_path(user), class: 'profile-link text-primary'
     end
   end

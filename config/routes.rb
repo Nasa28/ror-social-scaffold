@@ -4,7 +4,6 @@ Rails.application.routes.draw do
    get '/reject_request/:id', to: 'friendships#destroy', as: :reject_request
    get '/remove_friend/:id', to: 'friendships#remove_friend', as: :remove_friend
 root 'posts#index'
- 
   devise_for :users
   resources :friendships, only: %i[create update destroy]
  

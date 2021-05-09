@@ -7,7 +7,7 @@ class FriendshipsController < ApplicationController
 
   def update
     new_user = User.find(params[:id])
-    return unless current_user.confirm_friend(new_user)
+    return unless current_user.confirm_friendship
 
     Friendship.create!(user_id: current_user.id, friend_id: new_user.id, status: true)
     redirect_to new_user, notice: 'Request Accepted'
@@ -20,8 +20,8 @@ class FriendshipsController < ApplicationController
   end
 
   def remove_friend
-    remove_friendship = current_user.friendships.find_by(params[:status])
-    remove_friendship.destroy
+    friend = User.find_by(id: params[:id])
+    Friendship.remove_friendships(current_user, friend)
     redirect_to root_path, notice: 'Friend Removed Successfully'
   end
 end
