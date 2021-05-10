@@ -20,7 +20,7 @@
 
 ## Live Demo
 
--[@Live Demo](https://lit-depths-99700.herokuapp.com/)
+[Click here for Live Demo](https://lit-depths-99700.herokuapp.com/)
 
 
 ## Getting Started
