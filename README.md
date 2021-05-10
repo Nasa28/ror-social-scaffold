@@ -2,6 +2,19 @@
 
 > This project is a prototype of the facebook kind of friendship where a user can send a friend request to another user.In this app, Friendship can only be established when the reciever of the friendship invitation accepts the friend request.
 
+As a guest user:
+
+- I want to be able to create account/log in.
+- I can see only “Sign in” and “Sign out” page.
+
+As a logged-in user:
+
+- You can view all users list.
+- You can send and accept/reject friendship invitation.
+- You can create new posts (text only).
+- You can add comments to posts.
+
+
 ![screenshot](./app/assets/images/image1.png)
 ![screenshot](./app/assets/images/image2.png)
 
@@ -83,7 +96,7 @@ TBA
 
 👨‍💻 **Kalu Chinasa Agu**
 
-- Github: [@Nasa28](https://github.com/Nasa28)
+- Github: [Nasa28](https://github.com/Nasa28)
 -  Twitter: [@Ultimate_Nasa](https://twitter.com/Ultimate_Nasa)
 - LinkedIn: [LinkedIn](https://www.linkedin.com/in/kalu-chinasa-agu-a15080103/)
 
