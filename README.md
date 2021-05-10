@@ -4,8 +4,8 @@
 
 As a guest user:
 
-- I want to be able to create account/log in.
-- I can see only “Sign in” and “Sign out” page.
+- You can create account/log in.
+- You can see only “Sign in” and “Sign out” page.
 
 As a logged-in user:
 
