@@ -4,18 +4,22 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.7.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.2.4'
-# Use postgresql as the database for Active Record
-gem 'pg', '>= 0.18', '< 2.0'
-# Use Puma as the app server
-gem 'puma', '~> 3.12'
+gem 'rails', '~> 6.1.3.1'
+group :development, :test do
+  gem 'sqlite3', '~> 1.4'
+end
+
+group :production do
+  gem 'pg'
+end
+gem 'puma', '~> 5.0'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'mini_racer', platforms: :ruby
-
+gem 'webpacker', '~> 5.0'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
@@ -42,10 +46,13 @@ gem 'devise'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
+  gem 'rspec-rails', '~> 5.0', '>= 5.0.1'
 end
 
 group :test do
+  gem 'capybara', '>= 3.26'
   gem 'rspec'
+  gem 'selenium-webdriver'
 end
 
 group :development do
@@ -59,4 +66,5 @@ group :development do
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
+gem 'faker', '~> 2.17'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
